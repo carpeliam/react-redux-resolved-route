@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 
 export class ResolvingComponent extends React.PureComponent {
   componentWillMount() {
-    const { resolve } = this.props;
-    this.childIsSatisfied = resolve();
+    const { resolve, dispatch, state, match: { params } } = this.props;
+    this.childIsSatisfied = resolve(dispatch, state, params);
   }
   render() {
     const { component: C, state } = this.props;
-    return (this.childIsSatisfied(state)) ? <C /> : null;
+    const childIsSatisfied = (this.childIsSatisfied) ? this.childIsSatisfied(state) : true;
+    return (childIsSatisfied) ? <C /> : null;
   }
 }
 

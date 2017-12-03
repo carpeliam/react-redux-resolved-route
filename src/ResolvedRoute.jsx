@@ -5,9 +5,12 @@ import ResolvingComponent from './ResolvingComponent';
 
 
 export default function ResolvedRoute({ component, resolve, ...rest }) {
-  return <Route {...rest}
-    render={(props) => <ResolvingComponent resolve={resolve} component={component} />}
-  />;
+  return (
+    <Route
+      {...rest}
+      render={(props) => <ResolvingComponent resolve={resolve} component={component} {...props} />}
+    />
+  );
 }
 ResolvedRoute.propTypes = {
   resolve: PropTypes.func.isRequired,

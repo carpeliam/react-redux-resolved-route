@@ -62,4 +62,22 @@ describe('ResolvedRoute', () => {
     expect(route.props.exact).to.be.true;
     expect(route.props.path).to.be.eql('/');
   });
+
+  it('passes routing props from Route to child component', (done) => {
+    function verifyParams(dispatch, state, params) {
+      expect(params).to.eql({});
+      done();
+    }
+    try {
+      TestRenderer.create(
+        <Provider store={store}>
+          <MemoryRouter>
+            <ResolvedRoute exact path="/" component={ThingsComponent} resolve={verifyParams} />
+          </MemoryRouter>
+        </Provider>
+      );
+    } catch (e) {
+      done(e);
+    }
+  });
 });
