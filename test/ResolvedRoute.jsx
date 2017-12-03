@@ -47,4 +47,19 @@ describe('ResolvedRoute', () => {
     store.dispatch(fetchThings());
     expect(testInstance.findAllByType(ThingsComponent)).not.to.be.empty;
   });
+
+  it('passes Route props to the Route', () => {
+    const testRenderer = TestRenderer.create(
+      <Provider store={store}>
+        <MemoryRouter>
+          <ResolvedRoute exact path="/" component={ThingsComponent} resolve={resolveThings} />
+        </MemoryRouter>
+      </Provider>
+    );
+    const testInstance = testRenderer.root;
+
+    const route = testInstance.findByType(Route);
+    expect(route.props.exact).to.be.true;
+    expect(route.props.path).to.be.eql('/');
+  });
 });
