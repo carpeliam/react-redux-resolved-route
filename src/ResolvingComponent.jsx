@@ -7,9 +7,9 @@ export class ResolvingComponent extends React.PureComponent {
     this.childIsSatisfied = resolve(dispatch, state, params);
   }
   render() {
-    const { component: C, state } = this.props;
+    const { resolve, dispatch, state, component: C, ...rest } = this.props;
     const childIsSatisfied = (this.childIsSatisfied) ? this.childIsSatisfied(state) : true;
-    return (childIsSatisfied) ? <C /> : null;
+    return (childIsSatisfied) ? <C {...rest} /> : null;
   }
 }
 

@@ -1,11 +1,12 @@
 {
   "name": "react-redux-resolved-route",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Route to ensure that components have what they need before they're rendered",
   "main": "dist/ResolvedRoute.js",
   "scripts": {
     "build": "babel src --out-dir dist",
     "lint": "eslint src test",
+    "prepublish": "npm run build",
     "test": "mocha --require babel-register 'test/**/*.{js,jsx}'"
   },
   "repository": "https://github.com/carpeliam/react-redux-resolved-route",

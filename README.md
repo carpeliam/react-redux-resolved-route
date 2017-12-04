@@ -16,7 +16,7 @@ import createHistory from 'history/createBrowserHistory'
 import { Route } from 'react-router'
 
 // Import this special route
-import { ResolvedRoute } from 'react-redux-resolved-route'
+import ResolvedRoute from 'react-redux-resolved-route'
 
 
 import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux'
@@ -38,20 +38,20 @@ const store = createStore(
 
 // A resolve function receives store.dispatch, the current redux state, and any URL parameters
 function resolveThings(dispatch, state, params) {
-  const thingsExist = ({ things }) => things.length;
+  const thingsExist = ({ things }) => things.length
   if (!thingsExist(state)) {
-    dispatch(getThings());
+    dispatch(getThings())
     // Return a function that receives the state and returns true if the component can be rendered
-    return thingsExist;
+    return thingsExist
   }
 }
 
 function resolveThing(dispatch, state, params) {
-  const id = parseInt(params.id, 10);
-  const thingExists = ({ things }) => things.find(t => t.id === id);
+  const id = parseInt(params.id, 10)
+  const thingExists = ({ things }) => things.find(t => t.id === id)
   if (!thingExists(state)) {
-    dispatch(getThing(id));
-    return thingExists;
+    dispatch(getThing(id))
+    return thingExists
   }
 }
 
