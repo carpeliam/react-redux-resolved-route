@@ -2,38 +2,19 @@
 
 Wouldn't it be nice if the components underneath your routes had everything they needed before they were rendered? Now they can.
 
-When using [react-router](https://github.com/ReactTraining/react-router), supply a `resolve` function to your route to indicate what your route needs before rendering.
+When using [react-router-redux](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-redux), supply a `resolve` function to your route to indicate what your route needs before rendering.
 
 Here's an example, using `react-router-redux`:
 ```js
-import React from 'react'
-import ReactDOM from 'react-dom'
-
-import { createStore, combineReducers, applyMiddleware } from 'redux'
-import { Provider } from 'react-redux'
-
-import createHistory from 'history/createBrowserHistory'
 import { Route } from 'react-router'
-
-// Import this special route
-import ResolvedRoute from 'react-redux-resolved-route'
-
-
 import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux'
-
-import reducers from './reducers' // Or wherever you keep your reducers
-
+import ResolvedRoute from 'react-redux-resolved-route' // <== This library, right here
 import { getThing, getThings } from './actions' // Or wherever you keep your actions
 
 const history = createHistory()
-const middleware = routerMiddleware(history)
-
 const store = createStore(
-  combineReducers({
-    ...reducers,
-    router: routerReducer
-  }),
-  applyMiddleware(middleware)
+  combineReducers({ ...reducers, router: routerReducer }),
+  applyMiddleware(routerMiddleware(history))
 )
 
 // A resolve function receives store.dispatch, the current redux state, and any URL parameters
