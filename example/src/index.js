@@ -3,14 +3,14 @@ import { render } from 'react-dom';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import { Provider, connect } from 'react-redux';
 import thunk from 'redux-thunk';
-import createHistory from 'history/createBrowserHistory';
+import { createBrowserHistory } from 'history';
 import { Route } from 'react-router';
 import { ConnectedRouter as Router, routerReducer, routerMiddleware } from 'react-router-redux';
 import { Link } from 'react-router-dom';
 
 import ResolvedRoute from 'react-redux-resolved-route';
 
-const history = createHistory();
+const history = createBrowserHistory();
 
 const store = createStore(
   combineReducers({ things, router: routerReducer }),
